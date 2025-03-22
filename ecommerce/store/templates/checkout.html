@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+</head>
+<body>
+    <div class="checkout-container">
+        <h1>Checkout</h1>
+        <div class="order-summary">
+            <p><strong>Order Summary:</strong></p>
+            <ul>
+                {% for item in cart_items %}
+                    <li>{{ item.product.name }} x {{ item.quantity }} - ${{ item.total_price }}</li>
+                {% endfor %}
+            </ul>
+            <p><strong>Total: ${{ total_price }}</strong></p>
+        </div>
+        <form method="post" class="checkout-form">
+            {% csrf_token %}
+            <button type="submit" class="checkout-btn">Pay Now</button>
+        </form>
+    </div>
+</body>
+</html>
+
